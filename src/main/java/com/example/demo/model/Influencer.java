@@ -1,63 +1,67 @@
-package com.example.PracticeProject;
+package com.example.demo.model;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-public class  {
+@Table(name = "influencers")
+public class Influencer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    private String email;
-    private float cgpa;
 
-    public StuEnt(Long id, String name, String email, float cgpa) {
-        this.id = id;
+    @Column(unique = true, nullable = false)
+    private String socialHandle;
+
+    private boolean active = true;
+
+    @OneToMany(mappedBy = "influencer", cascade = CascadeType.ALL)
+    private List<DiscountCode> discountCodes;
+
+    // No-argument constructor
+    public Influencer() {
+    }
+
+    // Parameterized constructor
+    public Influencer(String name, String socialHandle, boolean active) {
         this.name = name;
-        this.email = email;
-        this.cgpa = cgpa;
+        this.socialHandle = socialHandle;
+        this.active = active;
     }
 
-    public StuEnt(){
-
-    }
-
+    // Getters and setters
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public String getSocialHandle() {
+        return socialHandle;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public void setSocialHandle(String socialHandle) {
+        this.socialHandle = socialHandle;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setActive(boolean active) {
+        this.active = active;
     }
-
-    public float getCgpa() {
-        return cgpa;
-    }
-
-    public void setCgpa(float cgpa) {
-        this.cgpa = cgpa;
-    }
-
-    
 }
