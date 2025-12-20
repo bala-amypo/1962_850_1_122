@@ -7,11 +7,9 @@ public class AuthResponse {
     private String email;
     private String role;
 
-    // No-argument constructor
     public AuthResponse() {
     }
 
-    // Parameterized constructor
     public AuthResponse(String token, Long userId, String email, String role) {
         this.token = token;
         this.userId = userId;
@@ -19,7 +17,6 @@ public class AuthResponse {
         this.role = role;
     }
 
-    // Getters and setters
     public String getToken() {
         return token;
     }
