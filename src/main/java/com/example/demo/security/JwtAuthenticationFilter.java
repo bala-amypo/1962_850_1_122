@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
-        // 🔥 CRITICAL: Skip JWT for auth endpoints
+      
         if (path.startsWith("/auth/")) {
             filterChain.doFilter(request, response);
             return;
@@ -67,7 +67,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            // Invalid token → clear context, DO NOT throw
+           
             SecurityContextHolder.clearContext();
         }
 

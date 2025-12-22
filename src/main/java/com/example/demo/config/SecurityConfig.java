@@ -21,13 +21,11 @@ public class SecurityConfig {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-    // ✅ Password encoder bean (REQUIRED for register/login)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // ✅ Security configuration
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -51,8 +49,6 @@ public class SecurityConfig {
                 ).permitAll()
                 .anyRequest().authenticated()
             )
-
-            // Allow H2 console frames
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
 
             // JWT filter
