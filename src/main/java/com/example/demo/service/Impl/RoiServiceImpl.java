@@ -1,0 +1,67 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.DiscountCode;
+import com.example.demo.model.RoiReport;
+import com.example.demo.model.SaleTransaction;
+import com.example.demo.repository.DiscountCodeRepository;
+import com.example.demo.repository.RoiReportRepository;
+import com.example.demo.repository.SaleTransactionRepository;
+import com.example.demo.service.RoiService;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+@Service
+public class RoiServiceImpl implements RoiService {
+
+    private final RoiReportRepository roiReportRepository;
+    private final SaleTransactionRepository saleTransactionRepository;
+    private final DiscountCodeRepository discountCodeRepository;
+
+    public RoiServiceImpl(RoiReportRepository roiReportRepository,
+            SaleTransactionRepository saleTransactionRepository,
+            DiscountCodeRepository discountCodeRepository) {
+        this.roiReportRepository = roiReportRepository;
+        this.saleTransactionRepository = saleTransactionRepository;
+        this.discountCodeRepository = discountCodeRepository;
+    }
+
+    @Override
+    public RoiReport generateReportForCode(Long discountCodeId) {
+        DiscountCode code = discountCodeRepository.findById(discountCodeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Discount code not found"));
+
+        List<SaleTransaction> sales = saleTransactionRepository.findByDiscountCodeId(discountCodeId);
+
+        BigDecimal totalSales = sales.stream()
+                .map(SaleTransaction::getTransactionAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        Integer totalTransactions = sales.size();
+
+        // Calculate ROI percentage - simple formula based on discount percentage
+        Double roiPercentage = 0.0;
+        if (code.getDiscountPercentage() != null && totalSales.compareTo(BigDecimal.ZERO) > 0) {
+            // ROI = (totalSales * discountPercentage) / 100
+            roiPercentage = totalSales.multiply(BigDecimal.valueOf(code.getDiscountPercentage()))
+                    .divide(BigDecimal.valueOf(100), 2, java.math.RoundingMode.HALF_UP)
+                    .doubleValue();
+        }
+
+        RoiReport report = new RoiReport(code, totalSales, totalTransactions, roiPercentage);
+        return roiReportRepository.save(report);
+    }
+
+    @Override
+    public RoiReport getReportById(Long reportId) {
+        return roiReportRepository.findById(reportId)
+                .orElseThrow(() -> new ResourceNotFoundException("ROI report not found"));
+    }
+
+    @Override
+    public List<RoiReport> getReportsForInfluencer(Long influencerId) {
+        return roiReportRepository.findByDiscountCodeInfluencerId(influencerId);
+    }
+}
