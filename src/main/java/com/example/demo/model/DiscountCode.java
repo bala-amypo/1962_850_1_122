@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "discount_codes")
@@ -11,8 +10,10 @@ public class DiscountCode {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String codeValue;
 
+    @Column(nullable = false)
     private Double discountPercentage;
 
     @ManyToOne
@@ -23,57 +24,49 @@ public class DiscountCode {
     @JoinColumn(name = "campaign_id")
     private Campaign campaign;
 
-    @OneToMany(mappedBy = "discountCode", cascade = CascadeType.ALL)
-    private List<SaleTransaction> saleTransactions;
-
-    @OneToMany(mappedBy = "discountCode", cascade = CascadeType.ALL)
-    private List<RoiReport> roiReports;
-
-    // No-argument constructor
     public DiscountCode() {
     }
 
-    // Parameterized constructor
     public DiscountCode(String codeValue, Double discountPercentage) {
         this.codeValue = codeValue;
         this.discountPercentage = discountPercentage;
     }
 
-    // Getters and setters
+    // Getters and Setters
     public Long getId() {
         return id;
-    }
-
-    public String getCodeValue() {
-        return codeValue;
-    }
-
-    public Double getDiscountPercentage() {
-        return discountPercentage;
-    }
-
-    public Influencer getInfluencer() {
-        return influencer;
-    }
-
-    public Campaign getCampaign() {
-        return campaign;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public String getCodeValue() {
+        return codeValue;
+    }
+
     public void setCodeValue(String codeValue) {
         this.codeValue = codeValue;
+    }
+
+    public Double getDiscountPercentage() {
+        return discountPercentage;
     }
 
     public void setDiscountPercentage(Double discountPercentage) {
         this.discountPercentage = discountPercentage;
     }
 
+    public Influencer getInfluencer() {
+        return influencer;
+    }
+
     public void setInfluencer(Influencer influencer) {
         this.influencer = influencer;
+    }
+
+    public Campaign getCampaign() {
+        return campaign;
     }
 
     public void setCampaign(Campaign campaign) {
