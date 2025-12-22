@@ -1,12 +1,79 @@
-package com.example.demo.repository;
+package com.example.demo.model;
 
-import com.example.demo.model.RoiReport;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 
-import java.util.List;
+@Entity
+@Table(name = "sale_transactions")
+public class SaleTransaction {
 
-@Repository
-public interface RoiReportRepository extends JpaRepository<RoiReport, Long> {
-    List<RoiReport> findByDiscountCodeInfluencerId(Long influencerId);
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "discount_code_id")
+    private DiscountCode discountCode;
+
+    @Column(nullable = false)
+    private BigDecimal transactionAmount;
+
+    @Column(nullable = false)
+    private Timestamp transactionDate;
+
+    @Column(nullable = false)
+    private Long customerId;
+
+    public SaleTransaction() {
+    }
+
+    public SaleTransaction(DiscountCode discountCode, BigDecimal transactionAmount,
+            Timestamp transactionDate, Long customerId) {
+        this.discountCode = discountCode;
+        this.transactionAmount = transactionAmount;
+        this.transactionDate = transactionDate;
+        this.customerId = customerId;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public DiscountCode getDiscountCode() {
+        return discountCode;
+    }
+
+    public void setDiscountCode(DiscountCode discountCode) {
+        this.discountCode = discountCode;
+    }
+
+    public BigDecimal getTransactionAmount() {
+        return transactionAmount;
+    }
+
+    public void setTransactionAmount(BigDecimal transactionAmount) {
+        this.transactionAmount = transactionAmount;
+    }
+
+    public Timestamp getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(Timestamp transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
 }
