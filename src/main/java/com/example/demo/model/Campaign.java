@@ -29,7 +29,6 @@ public class Campaign {
         this.endDate = endDate;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
