@@ -41,7 +41,6 @@ public class RoiServiceImpl implements RoiService {
 
         Integer totalTransactions = sales.size();
 
-        // Calculate ROI percentage - simple formula based on discount percentage
         Double roiPercentage = 0.0;
         if (code.getDiscountPercentage() != null && totalSales.compareTo(BigDecimal.ZERO) > 0) {
             // ROI = (totalSales * discountPercentage) / 100
