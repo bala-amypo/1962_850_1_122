@@ -41,7 +41,6 @@
 //         return ResponseEntity.ok(sales);
 //     }
 // }
-
 package com.example.demo.controller;
 
 import com.example.demo.model.SaleTransaction;
@@ -67,18 +66,21 @@ public class SaleTransactionController {
         return ResponseEntity.ok(saleTransactionService.createSale(transaction));
     }
 
+    // Changed @PathVariable from Long to String
     @GetMapping("/code/{discountCodeId}")
-    public ResponseEntity<List<SaleTransaction>> getSalesForCode(@PathVariable Long discountCodeId) {
+    public ResponseEntity<List<SaleTransaction>> getSalesForCode(@PathVariable String discountCodeId) {
         return ResponseEntity.ok(saleTransactionService.getSalesForCode(discountCodeId));
     }
 
+    // Changed @PathVariable from Long to String
     @GetMapping("/influencer/{influencerId}")
-    public ResponseEntity<List<SaleTransaction>> getSalesForInfluencer(@PathVariable Long influencerId) {
+    public ResponseEntity<List<SaleTransaction>> getSalesForInfluencer(@PathVariable String influencerId) {
         return ResponseEntity.ok(saleTransactionService.getSalesForInfluencer(influencerId));
     }
 
+    // Changed @PathVariable from Long to String
     @GetMapping("/campaign/{campaignId}")
-    public ResponseEntity<List<SaleTransaction>> getSalesForCampaign(@PathVariable Long campaignId) {
+    public ResponseEntity<List<SaleTransaction>> getSalesForCampaign(@PathVariable String campaignId) {
         return ResponseEntity.ok(saleTransactionService.getSalesForCampaign(campaignId));
     }
 }
