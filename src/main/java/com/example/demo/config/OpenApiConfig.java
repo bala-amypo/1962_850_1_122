@@ -25,6 +25,12 @@ public class OpenApiConfig {
                 .servers(List.of(
                         new Server().url("https://9263.408procr.amypo.ai/")
                 ))
+
+
+
+
+
+
                 .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
                 .components(new Components()
                         .addSecuritySchemes("Bearer Authentication",
@@ -62,6 +68,12 @@ public class OpenApiConfig {
                         .title("Influencer Campaign ROI Tracker API")
                         .version("1.0")
                         .description("API for tracking influencer campaign ROI"))
+.servers(List.of(
+                        new Server().url("https://9263.408procr.amypo.ai/")
+                ))
+
+
+
                 .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
                 .components(new io.swagger.v3.oas.models.Components()
                         .addSecuritySchemes("Bearer Authentication",
