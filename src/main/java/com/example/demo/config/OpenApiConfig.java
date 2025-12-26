@@ -45,18 +45,18 @@ public class OpenApiConfig {
 */
 
 
-
-
-
-
 package com.example.demo.config;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 @Configuration
 public class OpenApiConfig {
@@ -68,14 +68,11 @@ public class OpenApiConfig {
                         .title("Influencer Campaign ROI Tracker API")
                         .version("1.0")
                         .description("API for tracking influencer campaign ROI"))
-.servers(List.of(
+                .servers(List.of(
                         new Server().url("https://9263.408procr.amypo.ai/")
                 ))
-
-
-
                 .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
-                .components(new io.swagger.v3.oas.models.Components()
+                .components(new Components()
                         .addSecuritySchemes("Bearer Authentication",
                                 new SecurityScheme()
                                         .type(SecurityScheme.Type.HTTP)
@@ -83,5 +80,3 @@ public class OpenApiConfig {
                                         .bearerFormat("JWT")));
     }
 }
-
-
