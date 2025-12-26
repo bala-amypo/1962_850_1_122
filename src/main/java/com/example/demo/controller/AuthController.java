@@ -96,9 +96,6 @@
 // }
 
 
-
-
-
 package com.example.demo.controller;
 
 import com.example.demo.dto.AuthResponse;
@@ -106,6 +103,7 @@ import com.example.demo.dto.LoginRequest;
 import com.example.demo.model.User;
 import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -118,6 +116,7 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public AuthController(UserService userService, JwtUtil jwtUtil, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
@@ -126,20 +125,17 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        User savedUser = userService.registerUser(user);
-        return ResponseEntity.ok(savedUser);
+        return ResponseEntity.ok(userService.registerUser(user));
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
         User user = userService.findByEmail(loginRequest.getEmail());
-        
         if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-            String token = jwtUtil.generateToken(user.getEmail(), user.getRole(), user.getId());
-            AuthResponse response = new AuthResponse(token, user.getId(), user.getEmail(), user.getRole());
-            return ResponseEntity.ok(response);
+            String token = jwtUtil.generateToken(user.getId(), user.getEmail(), user.getRole());
+            return ResponseEntity.ok(new AuthResponse(token, user.getId(), user.getEmail(), user.getRole()));
+        } else {
+            throw new RuntimeException("Invalid credentials");
         }
-        
-        throw new RuntimeException("Invalid credentials");
     }
 }

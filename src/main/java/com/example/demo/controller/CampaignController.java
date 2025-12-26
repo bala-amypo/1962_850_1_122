@@ -42,16 +42,13 @@
 //     }
 // }
 
-
-
-
 package com.example.demo.controller;
 
 import com.example.demo.model.Campaign;
 import com.example.demo.service.CampaignService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -60,25 +57,23 @@ public class CampaignController {
 
     private final CampaignService campaignService;
 
+    @Autowired
     public CampaignController(CampaignService campaignService) {
         this.campaignService = campaignService;
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Campaign> updateCampaign(@PathVariable Long id, @RequestBody Campaign campaign) {
-        Campaign updated = campaignService.updateCampaign(id, campaign);
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.ok(campaignService.updateCampaign(id, campaign));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Campaign> getCampaign(@PathVariable Long id) {
-        Campaign campaign = campaignService.getCampaignById(id);
-        return ResponseEntity.ok(campaign);
+        return ResponseEntity.ok(campaignService.getCampaignById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<Campaign>> getAllCampaigns() {
-        List<Campaign> campaigns = campaignService.getAllCampaigns();
-        return ResponseEntity.ok(campaigns);
+        return ResponseEntity.ok(campaignService.getAllCampaigns());
     }
 }

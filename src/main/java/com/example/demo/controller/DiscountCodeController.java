@@ -47,50 +47,18 @@
 //         return ResponseEntity.ok(codes);
 //     }
 // }
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
+package org.springframework.beans.factory.annotation;
 
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-
-
-package com.example.demo.controller;
-
-import com.example.demo.model.DiscountCode;
-import com.example.demo.service.DiscountCodeService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-@RestController
-@RequestMapping("/discount-codes")
-public class DiscountCodeController {
-
-    private final DiscountCodeService discountCodeService;
-
-    public DiscountCodeController(DiscountCodeService discountCodeService) {
-        this.discountCodeService = discountCodeService;
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<DiscountCode> getDiscountCode(@PathVariable Long id) {
-        DiscountCode code = discountCodeService.getDiscountCodeById(id);
-        return ResponseEntity.ok(code);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<DiscountCode> updateDiscountCode(@PathVariable Long id, @RequestBody DiscountCode discountCode) {
-        DiscountCode updated = discountCodeService.updateDiscountCode(id, discountCode);
-        return ResponseEntity.ok(updated);
-    }
-
-    @GetMapping("/influencer/{influencerId}")
-    public ResponseEntity<List<DiscountCode>> getCodesForInfluencer(@PathVariable Long influencerId) {
-        List<DiscountCode> codes = discountCodeService.getCodesForInfluencer(influencerId);
-        return ResponseEntity.ok(codes);
-    }
-
-    @GetMapping("/campaign/{campaignId}")
-    public ResponseEntity<List<DiscountCode>> getCodesForCampaign(@PathVariable Long campaignId) {
-        List<DiscountCode> codes = discountCodeService.getCodesForCampaign(campaignId);
-        return ResponseEntity.ok(codes);
-    }
+@Target({ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface Autowired {
+   boolean required() default true;
 }
