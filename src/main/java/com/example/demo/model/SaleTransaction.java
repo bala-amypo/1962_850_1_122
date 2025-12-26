@@ -98,19 +98,28 @@ public class SaleTransaction {
     private BigDecimal transactionAmount;
     private Timestamp transactionDate;
     
-    // 1. Change this field from Long to String
+    // Keep internal storage as String to support lines 416-417
     private String customerId; 
 
     public SaleTransaction() {
     }
 
-    // 2. Update the constructor to accept String customerId
+    // Overloaded Constructor for String (satisfies new tests)
     public SaleTransaction(DiscountCode discountCode, BigDecimal transactionAmount, Timestamp transactionDate,
             String customerId) {
         this.discountCode = discountCode;
         this.transactionAmount = transactionAmount;
         this.transactionDate = transactionDate;
         this.customerId = customerId;
+    }
+
+    // Overloaded Constructor for Long (satisfies existing tests like line 183)
+    public SaleTransaction(DiscountCode discountCode, BigDecimal transactionAmount, Timestamp transactionDate,
+            Long customerId) {
+        this.discountCode = discountCode;
+        this.transactionAmount = transactionAmount;
+        this.transactionDate = transactionDate;
+        this.customerId = (customerId == null) ? null : String.valueOf(customerId);
     }
 
     public Long getId() {
@@ -145,13 +154,17 @@ public class SaleTransaction {
         this.transactionDate = transactionDate;
     }
 
-    // 3. Update Getter return type to String
     public String getCustomerId() {
         return customerId;
     }
 
-    // 4. Update Setter parameter type to String
+    // Setter for String (Fixes errors at lines 416, 417)
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
+    }
+
+    // Overloaded Setter for Long (Fixes errors at lines 195, 362, 481, 483, 489, 491)
+    public void setCustomerId(Long customerId) {
+        this.customerId = (customerId == null) ? null : String.valueOf(customerId);
     }
 }
