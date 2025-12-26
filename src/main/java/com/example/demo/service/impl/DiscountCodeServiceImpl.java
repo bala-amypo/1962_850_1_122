@@ -123,3 +123,38 @@
 //         return discountCodeRepository.findByCampaignId(campaignId);
 //     }
 // }
+
+
+
+
+package com.example.demo.service.impl;
+
+import com.example.demo.model.DiscountCode;
+import com.example.demo.service.DiscountCodeService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class DiscountCodeServiceImpl implements DiscountCodeService {
+
+    @Override
+    public DiscountCode getDiscountCodeById(Long id) {
+        return null;
+    }
+
+    @Override
+    public DiscountCode updateDiscountCode(Long id, DiscountCode updated) {
+        return null;
+    }
+
+    @Override
+    public List<DiscountCode> getCodesForInfluencer(Long influencerId) {
+        return null;
+    }
+
+    @Override
+    public List<DiscountCode> getCodesForCampaign(Long campaignId) {
+        return null;
+    }
+}
