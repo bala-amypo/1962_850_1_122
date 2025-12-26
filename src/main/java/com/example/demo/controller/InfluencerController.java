@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/influencers") wd
+@RequestMapping("/influencers")
 public class InfluencerController {
 
     private final InfluencerService influencerService;
