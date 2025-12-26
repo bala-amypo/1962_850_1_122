@@ -106,24 +106,37 @@ public class SaleTransactionServiceImpl implements SaleTransactionService {
         return saleTransactionRepository.save(transaction);
     }
 
+    // --- Overloaded methods for Long (Supports existing tests) ---
+
+    @Override
+    public List<SaleTransaction> getSalesForCode(Long discountCodeId) {
+        return saleTransactionRepository.findByDiscountCodeId(discountCodeId);
+    }
+
+    @Override
+    public List<SaleTransaction> getSalesForInfluencer(Long influencerId) {
+        return saleTransactionRepository.findByDiscountCodeInfluencerId(influencerId);
+    }
+
+    @Override
+    public List<SaleTransaction> getSalesForCampaign(Long campaignId) {
+        return saleTransactionRepository.findByDiscountCodeCampaignId(campaignId);
+    }
+
+    // --- Overloaded methods for String (Supports tests at lines 416-417) ---
+
     @Override
     public List<SaleTransaction> getSalesForCode(String discountCodeId) {
-        // Convert String to Long to satisfy the repository requirements
-        Long id = Long.valueOf(discountCodeId);
-        return saleTransactionRepository.findByDiscountCodeId(id);
+        return getSalesForCode(Long.valueOf(discountCodeId));
     }
 
     @Override
     public List<SaleTransaction> getSalesForInfluencer(String influencerId) {
-        // Convert String to Long to satisfy the repository requirements
-        Long id = Long.valueOf(influencerId);
-        return saleTransactionRepository.findByDiscountCodeInfluencerId(id);
+        return getSalesForInfluencer(Long.valueOf(influencerId));
     }
 
     @Override
     public List<SaleTransaction> getSalesForCampaign(String campaignId) {
-        // Convert String to Long to satisfy the repository requirements
-        Long id = Long.valueOf(campaignId);
-        return saleTransactionRepository.findByDiscountCodeCampaignId(id);
+        return getSalesForCampaign(Long.valueOf(campaignId));
     }
 }

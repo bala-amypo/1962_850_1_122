@@ -20,12 +20,13 @@ import java.util.List;
 public interface SaleTransactionService {
     SaleTransaction createSale(SaleTransaction transaction);
 
-    // Changed from Long to String to match test expectations
+    // Overloaded methods for Long (to satisfy existing test cases)
+    List<SaleTransaction> getSalesForCode(Long discountCodeId);
+    List<SaleTransaction> getSalesForInfluencer(Long influencerId);
+    List<SaleTransaction> getSalesForCampaign(Long campaignId);
+
+    // Overloaded methods for String (to satisfy tests at lines 416-417)
     List<SaleTransaction> getSalesForCode(String discountCodeId);
-
-    // Changed from Long to String to match test expectations
     List<SaleTransaction> getSalesForInfluencer(String influencerId);
-
-    // Changed from Long to String to match test expectations
     List<SaleTransaction> getSalesForCampaign(String campaignId);
 }
