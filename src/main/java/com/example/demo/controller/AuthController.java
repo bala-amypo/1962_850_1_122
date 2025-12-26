@@ -140,7 +140,6 @@
 //     }
 // }
 
-
 package com.example.demo.controller;
 
 import com.example.demo.dto.AuthResponse;
@@ -192,4 +191,3 @@ public class AuthController {
         );
     }
 }
-
