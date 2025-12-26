@@ -12,7 +12,6 @@
 // }
 
 
-
 package com.example.demo.repository;
 
 import com.example.demo.model.RoiReport;
@@ -24,4 +23,5 @@ public interface RoiReportRepository extends JpaRepository<RoiReport, Long> {
     List<RoiReport> findByDiscountCodeInfluencerId(Long influencerId);
 
 }
+
 
