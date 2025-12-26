@@ -63,10 +63,10 @@
 // }
 
 
-
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "influencers")
@@ -82,7 +82,11 @@ public class Influencer {
 
     private boolean active = true;
 
-    public Influencer() {}
+    @OneToMany(mappedBy = "influencer")
+    private List<DiscountCode> discountCodes;
+
+    public Influencer() {
+    }
 
     public Influencer(String name, String socialHandle, boolean active) {
         this.name = name;
@@ -90,16 +94,35 @@ public class Influencer {
         this.active = active;
     }
 
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getSocialHandle() { return socialHandle; }
-    public void setSocialHandle(String socialHandle) { this.socialHandle = socialHandle; }
+    public String getName() {
+        return name;
+    }
 
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSocialHandle() {
+        return socialHandle;
+    }
+
+    public void setSocialHandle(String socialHandle) {
+        this.socialHandle = socialHandle;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

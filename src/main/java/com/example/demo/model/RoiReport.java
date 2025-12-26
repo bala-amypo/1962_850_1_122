@@ -78,7 +78,6 @@
 // }
 
 
-
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -96,33 +95,57 @@ public class RoiReport {
     private DiscountCode discountCode;
 
     private BigDecimal totalSales;
-
     private Integer totalTransactions;
-
     private Double roiPercentage;
 
-    public RoiReport() {}
+    public RoiReport() {
+    }
 
-    public RoiReport(DiscountCode discountCode, BigDecimal totalSales, Integer totalTransactions, Double roiPercentage) {
+    public RoiReport(DiscountCode discountCode, BigDecimal totalSales, Integer totalTransactions,
+            Double roiPercentage) {
         this.discountCode = discountCode;
         this.totalSales = totalSales;
         this.totalTransactions = totalTransactions;
         this.roiPercentage = roiPercentage;
     }
 
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public DiscountCode getDiscountCode() { return discountCode; }
-    public void setDiscountCode(DiscountCode discountCode) { this.discountCode = discountCode; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public BigDecimal getTotalSales() { return totalSales; }
-    public void setTotalSales(BigDecimal totalSales) { this.totalSales = totalSales; }
+    public DiscountCode getDiscountCode() {
+        return discountCode;
+    }
 
-    public Integer getTotalTransactions() { return totalTransactions; }
-    public void setTotalTransactions(Integer totalTransactions) { this.totalTransactions = totalTransactions; }
+    public void setDiscountCode(DiscountCode discountCode) {
+        this.discountCode = discountCode;
+    }
 
-    public Double getRoiPercentage() { return roiPercentage; }
-    public void setRoiPercentage(Double roiPercentage) { this.roiPercentage = roiPercentage; }
+    public BigDecimal getTotalSales() {
+        return totalSales;
+    }
+
+    public void setTotalSales(BigDecimal totalSales) {
+        this.totalSales = totalSales;
+    }
+
+    public Integer getTotalTransactions() {
+        return totalTransactions;
+    }
+
+    public void setTotalTransactions(Integer totalTransactions) {
+        this.totalTransactions = totalTransactions;
+    }
+
+    public Double getRoiPercentage() {
+        return roiPercentage;
+    }
+
+    public void setRoiPercentage(Double roiPercentage) {
+        this.roiPercentage = roiPercentage;
+    }
 }
