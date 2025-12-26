@@ -21,7 +21,10 @@ import java.util.List;
 
 public interface SaleTransactionService {
     SaleTransaction createSale(SaleTransaction transaction);
+
     List<SaleTransaction> getSalesForCode(Long discountCodeId);
+
     List<SaleTransaction> getSalesForInfluencer(Long influencerId);
+
     List<SaleTransaction> getSalesForCampaign(Long campaignId);
 }
