@@ -60,7 +60,8 @@ public class SecurityConfig {
 }
 
 
-*/package com.example.demo.config;
+*/
+package com.example.demo.config;
 
 import com.example.demo.security.CustomUserDetailsService;
 import com.example.demo.security.JwtAuthenticationFilter;
