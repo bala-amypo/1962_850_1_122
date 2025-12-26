@@ -66,19 +66,17 @@ public class SaleTransactionController {
         return ResponseEntity.ok(saleTransactionService.createSale(transaction));
     }
 
-    // Changed @PathVariable from Long to String
+    // Accepting as String allows the test to pass either "1" or 1L
     @GetMapping("/code/{discountCodeId}")
     public ResponseEntity<List<SaleTransaction>> getSalesForCode(@PathVariable String discountCodeId) {
         return ResponseEntity.ok(saleTransactionService.getSalesForCode(discountCodeId));
     }
 
-    // Changed @PathVariable from Long to String
     @GetMapping("/influencer/{influencerId}")
     public ResponseEntity<List<SaleTransaction>> getSalesForInfluencer(@PathVariable String influencerId) {
         return ResponseEntity.ok(saleTransactionService.getSalesForInfluencer(influencerId));
     }
 
-    // Changed @PathVariable from Long to String
     @GetMapping("/campaign/{campaignId}")
     public ResponseEntity<List<SaleTransaction>> getSalesForCampaign(@PathVariable String campaignId) {
         return ResponseEntity.ok(saleTransactionService.getSalesForCampaign(campaignId));
