@@ -78,7 +78,6 @@
 //     } }
 // 
 //
-
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -98,13 +97,16 @@ public class SaleTransaction {
 
     private BigDecimal transactionAmount;
     private Timestamp transactionDate;
-    private Long customerId;
+    
+    // 1. Change this field from Long to String
+    private String customerId; 
 
     public SaleTransaction() {
     }
 
+    // 2. Update the constructor to accept String customerId
     public SaleTransaction(DiscountCode discountCode, BigDecimal transactionAmount, Timestamp transactionDate,
-            Long customerId) {
+            String customerId) {
         this.discountCode = discountCode;
         this.transactionAmount = transactionAmount;
         this.transactionDate = transactionDate;
@@ -143,11 +145,13 @@ public class SaleTransaction {
         this.transactionDate = transactionDate;
     }
 
-    public Long getCustomerId() {
+    // 3. Update Getter return type to String
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Long customerId) {
+    // 4. Update Setter parameter type to String
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 }
