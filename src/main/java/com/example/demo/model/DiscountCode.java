@@ -71,9 +71,8 @@
 
 //     public void setCampaign(Campaign campaign) {
 //         this.campaign = campaign;
-//     }
-// }
-
+//     } }
+// 
 package com.example.demo.model;
 
 import jakarta.persistence.*;

@@ -10,7 +10,6 @@
 //         super(message, cause);
 //     }
 // }
-
 package com.example.demo.exception;
 
 public class ResourceNotFoundException extends RuntimeException {

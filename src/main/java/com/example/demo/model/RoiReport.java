@@ -74,9 +74,8 @@
 
 //     public void setRoiPercentage(Double roiPercentage) {
 //         this.roiPercentage = roiPercentage;
-//     }
-// }
-
+//     } }
+// 
 
 package com.example.demo.model;
 
