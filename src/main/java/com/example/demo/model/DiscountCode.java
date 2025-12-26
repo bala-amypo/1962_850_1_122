@@ -1,3 +1,82 @@
+// package com.example.demo.model;
+
+// import jakarta.persistence.*;
+
+// @Entity
+// @Table(name = "discount_codes")
+// public class DiscountCode {
+
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
+
+//     @Column(nullable = false)
+//     private String codeValue;
+
+//     @Column(nullable = false)
+//     private Double discountPercentage;
+
+//     @ManyToOne
+//     @JoinColumn(name = "influencer_id")
+//     private Influencer influencer;
+
+//     @ManyToOne
+//     @JoinColumn(name = "campaign_id")
+//     private Campaign campaign;
+
+//     public DiscountCode() {
+//     }
+
+//     public DiscountCode(String codeValue, Double discountPercentage) {
+//         this.codeValue = codeValue;
+//         this.discountPercentage = discountPercentage;
+//     }
+
+//     // Getters and Setters
+//     public Long getId() {
+//         return id;
+//     }
+
+//     public void setId(Long id) {
+//         this.id = id;
+//     }
+
+//     public String getCodeValue() {
+//         return codeValue;
+//     }
+
+//     public void setCodeValue(String codeValue) {
+//         this.codeValue = codeValue;
+//     }
+
+//     public Double getDiscountPercentage() {
+//         return discountPercentage;
+//     }
+
+//     public void setDiscountPercentage(Double discountPercentage) {
+//         this.discountPercentage = discountPercentage;
+//     }
+
+//     public Influencer getInfluencer() {
+//         return influencer;
+//     }
+
+//     public void setInfluencer(Influencer influencer) {
+//         this.influencer = influencer;
+//     }
+
+//     public Campaign getCampaign() {
+//         return campaign;
+//     }
+
+//     public void setCampaign(Campaign campaign) {
+//         this.campaign = campaign;
+//     }
+// }
+
+
+
+
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -5,15 +84,12 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "discount_codes")
 public class DiscountCode {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String codeValue;
 
-    @Column(nullable = false)
     private Double discountPercentage;
 
     @ManyToOne
@@ -24,8 +100,7 @@ public class DiscountCode {
     @JoinColumn(name = "campaign_id")
     private Campaign campaign;
 
-    public DiscountCode() {
-    }
+    public DiscountCode() {}
 
     public DiscountCode(String codeValue, Double discountPercentage) {
         this.codeValue = codeValue;
@@ -33,43 +108,18 @@ public class DiscountCode {
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getCodeValue() { return codeValue; }
+    public void setCodeValue(String codeValue) { this.codeValue = codeValue; }
 
-    public String getCodeValue() {
-        return codeValue;
-    }
+    public Double getDiscountPercentage() { return discountPercentage; }
+    public void setDiscountPercentage(Double discountPercentage) { this.discountPercentage = discountPercentage; }
 
-    public void setCodeValue(String codeValue) {
-        this.codeValue = codeValue;
-    }
+    public Influencer getInfluencer() { return influencer; }
+    public void setInfluencer(Influencer influencer) { this.influencer = influencer; }
 
-    public Double getDiscountPercentage() {
-        return discountPercentage;
-    }
-
-    public void setDiscountPercentage(Double discountPercentage) {
-        this.discountPercentage = discountPercentage;
-    }
-
-    public Influencer getInfluencer() {
-        return influencer;
-    }
-
-    public void setInfluencer(Influencer influencer) {
-        this.influencer = influencer;
-    }
-
-    public Campaign getCampaign() {
-        return campaign;
-    }
-
-    public void setCampaign(Campaign campaign) {
-        this.campaign = campaign;
-    }
+    public Campaign getCampaign() { return campaign; }
+    public void setCampaign(Campaign campaign) { this.campaign = campaign; }
 }
