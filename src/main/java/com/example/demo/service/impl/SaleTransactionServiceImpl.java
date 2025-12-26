@@ -62,7 +62,6 @@
 
 
 
-
 package com.example.demo.service.impl;
 
 import com.example.demo.exception.ResourceNotFoundException;
@@ -108,17 +107,23 @@ public class SaleTransactionServiceImpl implements SaleTransactionService {
     }
 
     @Override
-    public List<SaleTransaction> getSalesForCode(Long discountCodeId) {
-        return saleTransactionRepository.findByDiscountCodeId(discountCodeId);
+    public List<SaleTransaction> getSalesForCode(String discountCodeId) {
+        // Convert String to Long to satisfy the repository requirements
+        Long id = Long.valueOf(discountCodeId);
+        return saleTransactionRepository.findByDiscountCodeId(id);
     }
 
     @Override
-    public List<SaleTransaction> getSalesForInfluencer(Long influencerId) {
-        return saleTransactionRepository.findByDiscountCodeInfluencerId(influencerId);
+    public List<SaleTransaction> getSalesForInfluencer(String influencerId) {
+        // Convert String to Long to satisfy the repository requirements
+        Long id = Long.valueOf(influencerId);
+        return saleTransactionRepository.findByDiscountCodeInfluencerId(id);
     }
 
     @Override
-    public List<SaleTransaction> getSalesForCampaign(Long campaignId) {
-        return saleTransactionRepository.findByDiscountCodeCampaignId(campaignId);
+    public List<SaleTransaction> getSalesForCampaign(String campaignId) {
+        // Convert String to Long to satisfy the repository requirements
+        Long id = Long.valueOf(campaignId);
+        return saleTransactionRepository.findByDiscountCodeCampaignId(id);
     }
 }
