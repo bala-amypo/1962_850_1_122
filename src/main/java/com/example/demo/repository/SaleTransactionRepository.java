@@ -33,6 +33,7 @@
 //     List<SaleTransaction> findByDiscountCodeInfluencerId(String influencerId);
 //     List<SaleTransaction> findByDiscountCodeCampaignId(String campaignId);
 // }
+
 package com.example.demo.repository;
 
 import com.example.demo.model.SaleTransaction;
