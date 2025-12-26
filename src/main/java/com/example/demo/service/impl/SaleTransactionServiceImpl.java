@@ -61,7 +61,6 @@
 // }
 
 
-
 package com.example.demo.service.impl;
 
 import com.example.demo.exception.ResourceNotFoundException;
@@ -106,7 +105,8 @@ public class SaleTransactionServiceImpl implements SaleTransactionService {
         return saleTransactionRepository.save(transaction);
     }
 
-    // --- Overloaded methods for Long (Supports existing tests) ---
+    // --- Overloaded methods for Long (Supports lines 34, 76, 77) ---
+    // These fix "long cannot be converted to String"
 
     @Override
     public List<SaleTransaction> getSalesForCode(Long discountCodeId) {
@@ -123,20 +123,22 @@ public class SaleTransactionServiceImpl implements SaleTransactionService {
         return saleTransactionRepository.findByDiscountCodeCampaignId(campaignId);
     }
 
-    // --- Overloaded methods for String (Supports tests at lines 416-417) ---
+    // --- Overloaded methods for String (Supports lines 416-417) ---
+    // These fix "String cannot be converted to Long"
 
     @Override
     public List<SaleTransaction> getSalesForCode(String discountCodeId) {
-        return getSalesForCode(Long.valueOf(discountCodeId));
+        // Bridges the String from the test to the Long required by the database
+        return saleTransactionRepository.findByDiscountCodeId(Long.valueOf(discountCodeId));
     }
 
     @Override
     public List<SaleTransaction> getSalesForInfluencer(String influencerId) {
-        return getSalesForInfluencer(Long.valueOf(influencerId));
+        return saleTransactionRepository.findByDiscountCodeInfluencerId(Long.valueOf(influencerId));
     }
 
     @Override
     public List<SaleTransaction> getSalesForCampaign(String campaignId) {
-        return getSalesForCampaign(Long.valueOf(campaignId));
+        return saleTransactionRepository.findByDiscountCodeCampaignId(Long.valueOf(campaignId));
     }
 }

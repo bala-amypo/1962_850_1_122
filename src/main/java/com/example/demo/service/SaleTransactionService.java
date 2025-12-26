@@ -20,12 +20,14 @@ import java.util.List;
 public interface SaleTransactionService {
     SaleTransaction createSale(SaleTransaction transaction);
 
-    // Overloaded methods for Long (to satisfy existing test cases)
+    // 1. PRIMARY METHODS (Supports lines 34, 38, 76, 77, 78 using Long/long)
+    // These satisfy the "long cannot be converted to String" errors
     List<SaleTransaction> getSalesForCode(Long discountCodeId);
     List<SaleTransaction> getSalesForInfluencer(Long influencerId);
     List<SaleTransaction> getSalesForCampaign(Long campaignId);
 
-    // Overloaded methods for String (to satisfy tests at lines 416-417)
+    // 2. OVERLOADED METHODS (Supports lines 416-417 using String)
+    // These satisfy the "String cannot be converted to Long" errors
     List<SaleTransaction> getSalesForCode(String discountCodeId);
     List<SaleTransaction> getSalesForInfluencer(String influencerId);
     List<SaleTransaction> getSalesForCampaign(String campaignId);
