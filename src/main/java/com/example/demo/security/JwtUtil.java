@@ -80,6 +80,24 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.util.Date;
 
+
+
+@Component
+public class JwtUtil {
+
+    private final SecretKey key;
+    private final long expirationMillis;
+
+    public JwtUtil(
+            @Value("${jwt.secret:dev-secret-key-12345678901234567890}") String secretKey,
+            @Value("${jwt.expiration:86400000}") long expirationMillis) {
+
+        this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
+        this.expirationMillis = expirationMillis;
+    }
+}
+
+
 @Component
 public class JwtUtil {
 
