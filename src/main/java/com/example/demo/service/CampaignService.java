@@ -12,7 +12,6 @@
 
 //     List<Campaign> getAllCampaigns();
 // }
-
 package com.example.demo.service;
 
 import com.example.demo.model.Campaign;
