@@ -34,12 +34,42 @@
 //     List<SaleTransaction> findByDiscountCodeCampaignId(String campaignId);
 // }
 
+// package com.example.demo.repository;
+
+// import com.example.demo.model.SaleTransaction;
+// import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.stereotype.Repository;
+
+// @Repository
+// public interface SaleTransactionRepository extends JpaRepository<SaleTransaction, Long> {
+// }
+
+
+
+
+
 package com.example.demo.repository;
 
 import com.example.demo.model.SaleTransaction;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
 
-@Repository
-public interface SaleTransactionRepository extends JpaRepository<SaleTransaction, Long> {
+import java.math.BigDecimal;
+
+public interface SaleTransactionRepository
+        extends JpaRepository<SaleTransaction, Long> {
+
+    @Query("""
+        SELECT COALESCE(SUM(s.amount), 0)
+        FROM SaleTransaction s
+        WHERE s.discountCode.id = :discountCodeId
+    """)
+    BigDecimal totalSales(Long discountCodeId);
+
+    @Query("""
+        SELECT COUNT(s)
+        FROM SaleTransaction s
+        WHERE s.discountCode.id = :discountCodeId
+    """)
+    Integer totalTransactions(Long discountCodeId);
 }
