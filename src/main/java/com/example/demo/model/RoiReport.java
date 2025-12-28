@@ -154,98 +154,38 @@
 
 
 
-// package com.example.demo.model;
-
-// import java.math.BigDecimal;
-
-// public class RoiReport {
-//     private Long id;
-//     private DiscountCode discountCode;
-//     private BigDecimal totalSales;
-//     private Integer totalTransactions;
-//     private Double roiPercentage;
-
-//     public RoiReport() {}
-
-//     public RoiReport(DiscountCode code, BigDecimal sales, Integer tx, Double roi) {
-//         this.discountCode = code;
-//         this.totalSales = sales;
-//         this.totalTransactions = tx;
-//         this.roiPercentage = roi;
-//     }
-
-//     public Long getId() { return id; }
-//     public void setId(Long id) { this.id = id; }
-
-//     public DiscountCode getDiscountCode() { return discountCode; }
-//     public void setDiscountCode(DiscountCode discountCode) { this.discountCode = discountCode; }
-
-//     public BigDecimal getTotalSales() { return totalSales; }
-//     public void setTotalSales(BigDecimal totalSales) { this.totalSales = totalSales; }
-
-//     public Integer getTotalTransactions() { return totalTransactions; }
-//     public void setTotalTransactions(Integer totalTransactions) { this.totalTransactions = totalTransactions; }
-
-//     public Double getRoiPercentage() { return roiPercentage; }
-//     public void setRoiPercentage(Double roiPercentage) { this.roiPercentage = roiPercentage; }
-// }
-
-
-
-
 package com.example.demo.model;
 
 import java.math.BigDecimal;
 
 public class RoiReport {
-
+    private Long id;
     private DiscountCode discountCode;
     private BigDecimal totalSales;
     private Integer totalTransactions;
     private Double roiPercentage;
 
-    public RoiReport() {
+    public RoiReport() {}
+
+    public RoiReport(DiscountCode code, BigDecimal sales, Integer tx, Double roi) {
+        this.discountCode = code;
+        this.totalSales = sales;
+        this.totalTransactions = tx;
+        this.roiPercentage = roi;
     }
 
-    public RoiReport(DiscountCode discountCode,
-                     BigDecimal totalSales,
-                     Integer totalTransactions,
-                     Double roiPercentage) {
-        this.discountCode = discountCode;
-        this.totalSales = totalSales;
-        this.totalTransactions = totalTransactions;
-        this.roiPercentage = roiPercentage;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public DiscountCode getDiscountCode() {
-        return discountCode;
-    }
+    public DiscountCode getDiscountCode() { return discountCode; }
+    public void setDiscountCode(DiscountCode discountCode) { this.discountCode = discountCode; }
 
-    public void setDiscountCode(DiscountCode discountCode) {
-        this.discountCode = discountCode;
-    }
+    public BigDecimal getTotalSales() { return totalSales; }
+    public void setTotalSales(BigDecimal totalSales) { this.totalSales = totalSales; }
 
-    public BigDecimal getTotalSales() {
-        return totalSales;
-    }
+    public Integer getTotalTransactions() { return totalTransactions; }
+    public void setTotalTransactions(Integer totalTransactions) { this.totalTransactions = totalTransactions; }
 
-    public void setTotalSales(BigDecimal totalSales) {
-        this.totalSales = totalSales;
-    }
-
-    public Integer getTotalTransactions() {
-        return totalTransactions;
-    }
-
-    public void setTotalTransactions(Integer totalTransactions) {
-        this.totalTransactions = totalTransactions;
-    }
-
-    public Double getRoiPercentage() {
-        return roiPercentage;
-    }
-
-    public void setRoiPercentage(Double roiPercentage) {
-        this.roiPercentage = roiPercentage;
-    }
+    public Double getRoiPercentage() { return roiPercentage; }
+    public void setRoiPercentage(Double roiPercentage) { this.roiPercentage = roiPercentage; }
 }

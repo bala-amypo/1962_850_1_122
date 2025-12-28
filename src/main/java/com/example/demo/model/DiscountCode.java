@@ -147,80 +147,34 @@
 
 
 
-// package com.example.demo.model;
-
-// public class DiscountCode {
-//     private Long id;
-//     private String codeValue;
-//     private Double discountPercentage;
-//     private Influencer influencer;
-//     private Campaign campaign;
-
-//     public DiscountCode() {}
-
-//     public DiscountCode(String codeValue, Double discountPercentage) {
-//         this.codeValue = codeValue;
-//         this.discountPercentage = discountPercentage;
-//     }
-
-//     public Long getId() { return id; }
-//     public void setId(Long id) { this.id = id; }
-
-//     public String getCodeValue() { return codeValue; }
-//     public void setCodeValue(String codeValue) { this.codeValue = codeValue; }
-
-//     public Double getDiscountPercentage() { return discountPercentage; }
-//     public void setDiscountPercentage(Double discountPercentage) { this.discountPercentage = discountPercentage; }
-
-//     public Influencer getInfluencer() { return influencer; }
-//     public void setInfluencer(Influencer influencer) { this.influencer = influencer; }
-
-//     public Campaign getCampaign() { return campaign; }
-//     public void setCampaign(Campaign campaign) { this.campaign = campaign; }
-// }
-
-
-
-
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "discount_codes")
 public class DiscountCode {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String codeValue;
+    private Double discountPercentage;
+    private Influencer influencer;
+    private Campaign campaign;
 
-    private String code;
-    private Double cost; // influencer cost
+    public DiscountCode() {}
 
-    public DiscountCode() {
+    public DiscountCode(String codeValue, Double discountPercentage) {
+        this.codeValue = codeValue;
+        this.discountPercentage = discountPercentage;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getCode() {
-        return code;
-    }
+    public String getCodeValue() { return codeValue; }
+    public void setCodeValue(String codeValue) { this.codeValue = codeValue; }
 
-    public Double getCost() {
-        return cost;
-    }
+    public Double getDiscountPercentage() { return discountPercentage; }
+    public void setDiscountPercentage(Double discountPercentage) { this.discountPercentage = discountPercentage; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Influencer getInfluencer() { return influencer; }
+    public void setInfluencer(Influencer influencer) { this.influencer = influencer; }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setCost(Double cost) {
-        this.cost = cost;
-    }
+    public Campaign getCampaign() { return campaign; }
+    public void setCampaign(Campaign campaign) { this.campaign = campaign; }
 }
