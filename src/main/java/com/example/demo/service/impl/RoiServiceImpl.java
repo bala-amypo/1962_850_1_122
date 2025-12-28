@@ -139,29 +139,134 @@
 
 
 
+// package com.example.demo.service.impl;
+
+// import com.example.demo.model.RoiReport;
+// import com.example.demo.service.RoiService;
+// import org.springframework.stereotype.Service;
+
+// import java.util.List;
+
+// @Service
+// public class RoiServiceImpl implements RoiService {
+
+//     @Override
+//     public RoiReport generateReportForCode(Long discountCodeId) {
+//         return null;
+//     }
+
+//     @Override
+//     public RoiReport getReportById(Long reportId) {
+//         return null;
+//     }
+
+//     @Override
+//     public List<RoiReport> getReportsForInfluencer(Long influencerId) {
+//         return null;
+//     }
+// }
+
+
+
+
 package com.example.demo.service.impl;
 
+import com.example.demo.model.DiscountCode;
 import com.example.demo.model.RoiReport;
+import com.example.demo.model.SaleTransaction;
+import com.example.demo.repository.DiscountCodeRepository;
+import com.example.demo.repository.SaleTransactionRepository;
 import com.example.demo.service.RoiService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class RoiServiceImpl implements RoiService {
 
+    private final SaleTransactionRepository saleTransactionRepository;
+    private final DiscountCodeRepository discountCodeRepository;
+
+    public RoiServiceImpl(SaleTransactionRepository saleTransactionRepository,
+                          DiscountCodeRepository discountCodeRepository) {
+        this.saleTransactionRepository = saleTransactionRepository;
+        this.discountCodeRepository = discountCodeRepository;
+    }
+
+    /**
+     * Generate ROI report for a single discount code
+     */
     @Override
     public RoiReport generateReportForCode(Long discountCodeId) {
-        return null;
+
+        DiscountCode discountCode = discountCodeRepository.findById(discountCodeId)
+                .orElseThrow(() -> new RuntimeException("Discount code not found"));
+
+        BigDecimal totalSales =
+                saleTransactionRepository.totalSales(discountCodeId);
+
+        Integer totalTransactions =
+                saleTransactionRepository.totalTransactions(discountCodeId);
+
+        double cost = discountCode.getCost() == null ? 0 : discountCode.getCost();
+
+        double roiPercentage = cost == 0
+                ? 0
+                : ((totalSales.doubleValue() - cost) / cost) * 100;
+
+        return new RoiReport(
+                discountCode,
+                totalSales,
+                totalTransactions,
+                roiPercentage
+        );
     }
 
+    /**
+     * ROI Report is NOT stored in DB, so this is NOT supported
+     */
     @Override
     public RoiReport getReportById(Long reportId) {
-        return null;
+        throw new UnsupportedOperationException(
+                "ROI Report is computed dynamically and not stored in database"
+        );
     }
 
+    /**
+     * Generate ROI reports for all discount codes of an influencer
+     */
     @Override
     public List<RoiReport> getReportsForInfluencer(Long influencerId) {
-        return null;
+
+        List<DiscountCode> discountCodes =
+                discountCodeRepository.findByInfluencerId(influencerId);
+
+        List<RoiReport> reports = new ArrayList<>();
+
+        for (DiscountCode code : discountCodes) {
+
+            BigDecimal totalSales =
+                    saleTransactionRepository.totalSales(code.getId());
+
+            Integer totalTransactions =
+                    saleTransactionRepository.totalTransactions(code.getId());
+
+            double cost = code.getCost() == null ? 0 : code.getCost();
+
+            double roi = cost == 0
+                    ? 0
+                    : ((totalSales.doubleValue() - cost) / cost) * 100;
+
+            reports.add(new RoiReport(
+                    code,
+                    totalSales,
+                    totalTransactions,
+                    roi
+            ));
+        }
+
+        return reports;
     }
 }
