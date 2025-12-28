@@ -64,72 +64,6 @@ public class SecurityConfig {
 
 
 
-// package com.example.demo.config;
-
-// import com.example.demo.security.CustomUserDetailsService;
-// import com.example.demo.security.JwtAuthenticationFilter;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
-// import org.springframework.security.authentication.AuthenticationManager;
-// import org.springframework.security.authentication.AuthenticationProvider;
-// import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-// import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-// import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-// import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-// import org.springframework.security.config.http.SessionCreationPolicy;
-// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-// import org.springframework.security.crypto.password.PasswordEncoder;
-// import org.springframework.security.web.SecurityFilterChain;
-// import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-// @Configuration
-// public class SecurityConfig {
-
-//     @Autowired
-//     private JwtAuthenticationFilter jwtAuthenticationFilter;
-
-//     @Autowired
-//     private CustomUserDetailsService userDetailsService;
-
-//     @Bean
-//     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//         http
-//                 .csrf(AbstractHttpConfigurer::disable)
-//                 .authorizeHttpRequests(auth -> auth
-//                         .requestMatchers("/auth/register", "/auth/login", "/swagger-ui/**", "/v3/api-docs/**")
-//                         .permitAll()
-//                         .anyRequest().authenticated())
-//                 .sessionManagement(session -> session
-//                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                 .authenticationProvider(authenticationProvider())
-//                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-//         return http.build();
-//     }
-
-//     @Bean
-//     public AuthenticationProvider authenticationProvider() {
-//         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//         authProvider.setUserDetailsService(userDetailsService);
-//         authProvider.setPasswordEncoder(passwordEncoder());
-//         return authProvider;
-//     }
-
-//     @Bean
-//     public PasswordEncoder passwordEncoder() {
-//         return new BCryptPasswordEncoder();
-//     }
-
-//     @Bean
-//     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-//         return config.getAuthenticationManager();
-//     }
-// }
-
-
-
-
 
 
 
@@ -138,6 +72,8 @@ public class SecurityConfig {
 // import org.springframework.context.annotation.Bean;
 // import org.springframework.context.annotation.Configuration;
 // import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 // import org.springframework.security.web.SecurityFilterChain;
 
 // @Configuration
@@ -151,32 +87,42 @@ public class SecurityConfig {
 
 //         return http.build();
 //     }
+
+//     // 👇 THIS IS WHAT WAS MISSING
+//     @Bean
+//     public PasswordEncoder passwordEncoder() {
+//         return new BCryptPasswordEncoder();
+//     }
 // }
 
 
-package com.example.demo.security;
+package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Configuration
+@Configuration              // ✅ Marks this as configuration class
+@EnableWebSecurity          // ✅ Enables Spring Security
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Bean                   // ✅ Mandatory in Spring Boot 3+
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+            .csrf(csrf -> csrf.disable())           // disable CSRF (for testing)
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().permitAll()           // allow all requests
+            );
 
         return http.build();
     }
 
-    // 👇 THIS IS WHAT WAS MISSING
-    @Bean
+    @Bean                   // ✅ PasswordEncoder bean (fixes your error)
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
