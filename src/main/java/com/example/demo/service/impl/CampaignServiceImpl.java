@@ -66,9 +66,50 @@
 
 
 
+
+
+
+
+
+// package com.example.demo.service.impl;
+
+// import com.example.demo.model.Campaign;
+// import com.example.demo.service.CampaignService;
+// import org.springframework.stereotype.Service;
+
+// import java.util.List;
+
+// @Service
+// public class CampaignServiceImpl implements CampaignService {
+
+//     @Override
+//     public Campaign updateCampaign(Long campaignId, Campaign campaign) {
+//         return null;
+//     }
+
+//     @Override
+//     public Campaign getCampaignById(Long campaignId) {
+//         return null;
+//     }
+
+//     @Override
+//     public List<Campaign> getAllCampaigns() {
+//         return null;
+//     }
+// }
+
+
+
+
+
+
+
+
+
 package com.example.demo.service.impl;
 
 import com.example.demo.model.Campaign;
+import com.example.demo.repository.CampaignRepository;
 import com.example.demo.service.CampaignService;
 import org.springframework.stereotype.Service;
 
@@ -77,18 +118,32 @@ import java.util.List;
 @Service
 public class CampaignServiceImpl implements CampaignService {
 
-    @Override
-    public Campaign updateCampaign(Long campaignId, Campaign campaign) {
-        return null;
+    private final CampaignRepository campaignRepository;
+
+    public CampaignServiceImpl(CampaignRepository campaignRepository) {
+        this.campaignRepository = campaignRepository;
     }
 
     @Override
-    public Campaign getCampaignById(Long campaignId) {
-        return null;
+    public Campaign updateCampaign(Long id, Campaign campaign) {
+        Campaign existing = campaignRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found"));
+
+        existing.setCampaignName(campaign.getCampaignName());
+        existing.setStartDate(campaign.getStartDate());
+        existing.setEndDate(campaign.getEndDate());
+
+        return campaignRepository.save(existing);
+    }
+
+    @Override
+    public Campaign getCampaignById(Long id) {
+        return campaignRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found"));
     }
 
     @Override
     public List<Campaign> getAllCampaigns() {
-        return null;
+        return campaignRepository.findAll();
     }
 }
