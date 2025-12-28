@@ -15,6 +15,41 @@
 
 
 
+
+
+
+
+
+
+
+
+
+// package com.example.demo.service;
+
+// import com.example.demo.model.SaleTransaction;
+
+// import java.util.List;
+
+// public interface SaleTransactionService {
+
+//     SaleTransaction createSale(SaleTransaction transaction);
+
+//     List<SaleTransaction> getSalesForCode(Long discountCodeId);
+
+//     List<SaleTransaction> getSalesForInfluencer(Long influencerId);
+
+//     List<SaleTransaction> getSalesForCampaign(Long campaignId);
+// }
+
+
+
+
+
+
+
+
+
+
 package com.example.demo.service;
 
 import com.example.demo.model.SaleTransaction;
@@ -25,7 +60,7 @@ public interface SaleTransactionService {
 
     SaleTransaction createSale(SaleTransaction transaction);
 
-    List<SaleTransaction> getSalesForCode(Long discountCodeId);
+    List<SaleTransaction> getSalesForCode(Long codeId);
 
     List<SaleTransaction> getSalesForInfluencer(Long influencerId);
 
