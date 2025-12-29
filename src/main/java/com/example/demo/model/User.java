@@ -125,17 +125,17 @@ public class User {
 
     private LocalDateTime createdAt;
 
-    // ✅ Default constructor
+    //  Default constructor
     public User() {}
 
-    // ✅ Parameterized constructor
+    //  Parameterized constructor
     public User(Long id, String email, LocalDateTime createdAt) {
         this.id = id;
         this.email = email;
         this.createdAt = createdAt;
     }
 
-    // ✅ Getters & Setters
+    //  Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
