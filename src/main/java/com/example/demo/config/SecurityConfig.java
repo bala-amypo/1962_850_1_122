@@ -106,11 +106,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Configuration              // ✅ Marks this as configuration class
-@EnableWebSecurity          // ✅ Enables Spring Security
+@Configuration              
+@EnableWebSecurity          
 public class SecurityConfig {
 
-    @Bean                   // ✅ Mandatory in Spring Boot 3+
+    @Bean                  
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
@@ -122,7 +122,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean                   // ✅ PasswordEncoder bean (fixes your error)
+    @Bean                  
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
