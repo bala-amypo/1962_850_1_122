@@ -156,7 +156,7 @@ public class SaleTransaction {
     @JoinColumn(name = "discount_code_id")
     private DiscountCode discountCode;
 
-    // ✅ Default constructor
+    //  Default constructor
     public SaleTransaction() {}
 
     // ✅ Parameterized constructor
