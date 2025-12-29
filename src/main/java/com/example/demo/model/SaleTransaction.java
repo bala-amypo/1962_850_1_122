@@ -159,7 +159,7 @@ public class SaleTransaction {
     //  Default constructor
     public SaleTransaction() {}
 
-    // ✅ Parameterized constructor
+    //  Parameterized constructor
     public SaleTransaction(Long id, BigDecimal transactionAmount,
                            Timestamp transactionDate,
                            Long customerId, DiscountCode discountCode) {
@@ -170,7 +170,7 @@ public class SaleTransaction {
         this.discountCode = discountCode;
     }
 
-    // ✅ Getters & Setters
+    //  Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
