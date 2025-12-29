@@ -182,10 +182,10 @@ public class RoiReport {
     @JoinColumn(name = "discount_code_id")
     private DiscountCode discountCode;
 
-    // ✅ Default constructor
+    // Default constructor
     public RoiReport() {}
 
-    // ✅ Parameterized constructor
+    //  Parameterized constructor
     public RoiReport(Long id, BigDecimal totalSales,
                      int totalTransactions,
                      double roiPercentage,
@@ -197,7 +197,7 @@ public class RoiReport {
         this.discountCode = discountCode;
     }
 
-    // ✅ Getters & Setters
+    //  Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

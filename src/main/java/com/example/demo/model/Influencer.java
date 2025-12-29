@@ -118,17 +118,17 @@ public class Influencer {
     @OneToMany(mappedBy = "influencer")
     private List<DiscountCode> discountCodes;
 
-    // ✅ Default constructor
+    //  Default constructor
     public Influencer() {}
 
-    // ✅ Parameterized constructor
+    //  Parameterized constructor
     public Influencer(Long id, String name, boolean active) {
         this.id = id;
         this.name = name;
         this.active = active;
     }
 
-    // ✅ Getters & Setters
+    //  Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

@@ -121,8 +121,10 @@ public class Campaign {
     @OneToMany(mappedBy = "campaign")
     private List<DiscountCode> discountCodes;
 
+    //  Default constructor
     public Campaign() {}
 
+    //  Parameterized constructor
     public Campaign(Long id, String campaignName,
                     LocalDate startDate, LocalDate endDate) {
         this.id = id;
@@ -131,6 +133,7 @@ public class Campaign {
         this.endDate = endDate;
     }
 
+    //  Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

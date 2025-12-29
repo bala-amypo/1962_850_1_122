@@ -139,8 +139,10 @@ public class DiscountCode {
     @JoinColumn(name = "campaign_id")
     private Campaign campaign;
 
+    //  Default constructor
     public DiscountCode() {}
 
+    //  Parameterized constructor
     public DiscountCode(Long id, String codeValue,
                         double discountPercentage,
                         Influencer influencer, Campaign campaign) {
@@ -151,6 +153,7 @@ public class DiscountCode {
         this.campaign = campaign;
     }
 
+    //  Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
